@@ -49,12 +49,12 @@ app.post(
 			let writeOut = "";
 			switch (dataType) {
 				case "schedules": {
-					const { gameScheduleInfoList: schedules } = JSON.parse(body);
+					const { gameScheduleInfoList: schedules } = JSON.stringify(body);
 					writeOut += schedules;
 					break;
 				}
 				case "teamstats": {
-					const { teamStatInfoList: teamStats } = JSON.parse(body);
+					const { teamStatInfoList: teamStats } = JSON.stringify(body);
 
 					teamStats.forEach((stat) => {
 						writeOut += stat;
@@ -62,9 +62,9 @@ app.post(
 					break;
 				}
 				case "defense": {
-					const { playerDefensiveStatInfoList: defensiveStats } = JSON.parse(
-						body
-					);
+					const {
+						playerDefensiveStatInfoList: defensiveStats,
+					} = JSON.stringify(body);
 					defensiveStats.forEach((stat) => {
 						writeOut += stat;
 					});
@@ -72,9 +72,9 @@ app.post(
 				}
 				case "punting": {
 					try {
-						const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
-							body
-						);
+						const {
+							playerDefensiveStatInfoList: puntingStats,
+						} = JSON.stringify(body);
 						puntingStats.forEach((stat) => {
 							writeOut += stat;
 						});
@@ -89,7 +89,7 @@ app.post(
 					)}StatInfoList`;
 
 					try {
-						const stats = JSON.parse(body)[property];
+						const stats = JSON.stringify(body)[property];
 						stats.forEach((stat) => {
 							writeOut += stat;
 						});
