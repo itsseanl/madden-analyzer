@@ -49,12 +49,12 @@ app.post(
 			let writeOut = "";
 			switch (dataType) {
 				case "schedules": {
-					const { gameScheduleInfoList: schedules } = body;
+					const { gameScheduleInfoList: schedules } = JSON.parse(body);
 					writeOut += schedules;
 					break;
 				}
 				case "teamstats": {
-					const { teamStatInfoList: teamStats } = body;
+					const { teamStatInfoList: teamStats } = JSON.parse(body);
 
 					teamStats.forEach((stat) => {
 						writeOut += stat;
@@ -62,7 +62,9 @@ app.post(
 					break;
 				}
 				case "defense": {
-					const { playerDefensiveStatInfoList: defensiveStats } = body;
+					const { playerDefensiveStatInfoList: defensiveStats } = JSON.parse(
+						body
+					);
 					defensiveStats.forEach((stat) => {
 						writeOut += stat;
 					});
@@ -70,7 +72,9 @@ app.post(
 				}
 				case "punting": {
 					try {
-						const { playerDefensiveStatInfoList: puntingStats } = body;
+						const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
+							body
+						);
 						puntingStats.forEach((stat) => {
 							writeOut += stat;
 						});
@@ -85,7 +89,7 @@ app.post(
 					)}StatInfoList`;
 
 					try {
-						const stats = body[property];
+						const stats = JSON.parse(body)[property];
 						stats.forEach((stat) => {
 							writeOut += stat;
 						});
@@ -95,6 +99,7 @@ app.post(
 					break;
 				}
 			}
+			writeOut = JSON.stringify(writeOut);
 			//console.log(body)
 			fs.writeFile(`../src/data/week${weekNum}Info.json`, writeOut, function (
 				err
