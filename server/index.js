@@ -29,6 +29,9 @@ app.post(
 	(req, res) => {
 		console.log("weekly info path: " + req.params.dataType);
 		let body = "";
+		const {
+			params: { username, leagueId, weekType, weekNumber, dataType },
+		} = req;
 		const basePath = `data/${leagueId}/`;
 		// "defense", "kicking", "passing", "punting", "receiving", "rushing"
 		const statsPath = `${basePath}stats`;
