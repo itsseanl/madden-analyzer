@@ -27,7 +27,11 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 app.post(
 	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
+		console.log("weekly info path: " + req.path);
 		let body = "";
+		const basePath = `data/${leagueId}/`;
+		// "defense", "kicking", "passing", "punting", "receiving", "rushing"
+		const statsPath = `${basePath}stats`;
 		req.on("data", (chunk) => {
 			body += chunk.toString();
 		});
