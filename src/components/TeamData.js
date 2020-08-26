@@ -25,7 +25,7 @@ const TeamData = () => {
 						<option value="totalLosses">Losses</option>
 						<option value="totalTies">Ties</option>
 						<option value="offTotalYds">Off. Yds</option>
-						<option value="OffPassYds">Off. Pass Yds</option>
+						<option value="offPassYds">Off. Pass Yds</option>
 						<option value="offRushYds">Off. Rush Yds</option>
 						<option value="defTotalYds">Def. Yds</option>
 						<option value="defPassYds">Def. Pass Yds</option>
