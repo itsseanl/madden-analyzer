@@ -69,9 +69,9 @@ app.post(
 				case "teamstats": {
 					const { teamStatInfoList: teamStats } = JSON.parse(body);
 
-					teamStats.forEach((stat) => {
-						writeOut += JSON.stringify(stat);
-					});
+					//teamStats.forEach((stat) => {
+					writeOut += JSON.stringify(teamStats);
+					//});
 					fs.writeFile(
 						`../src/data/week${weekNum}teamStatsInfo.json`,
 						writeOut,
@@ -142,9 +142,9 @@ app.post(
 
 					try {
 						const stats = JSON.parse(body)[property];
-						stats.forEach((stat) => {
-							writeOut += JSON.stringify(stat);
-						});
+						//	stats.forEach((stat) => {
+						writeOut += JSON.stringify(stats);
+						//	});
 						fs.writeFile(
 							`../src/data/week${weekNum + property}Info.json`,
 							writeOut,
