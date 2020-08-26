@@ -45,7 +45,6 @@ app.post(
 			stats.forEach((stat) => {
 				writeOut += stat;
 			});
-			break;
 
 			//console.log(body)
 			fs.writeFile("../src/data/weeklyInfo.json", writeOut, function (err) {
