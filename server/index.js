@@ -3,7 +3,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 const fs = require("fs");
 
-//routes
+//league info
 app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 	let body = "";
 	req.on("data", (chunk) => {
@@ -22,6 +22,30 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 		});
 	});
 });
+
+//weekly info
+app.post(
+	"/:username/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
+	(req, res) => {
+		let body = "";
+		req.on("data", (chunk) => {
+			body += chunk.toString();
+		});
+		req.on("end", () => {
+			//console.log(body)
+			fs.writeFile("../src/data/weeklyInfo.json", body, function (err) {
+				if (err) {
+					return console.log(err);
+				} else {
+					res.sendStatus(200);
+
+					return console.log("wrote weekly data successfully");
+				}
+			});
+		});
+	}
+);
+
 //team rosters
 app.post("/:platform/:leagueId/team/:teamID/roster", (req, res) => {
 	let body = "";
