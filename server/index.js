@@ -42,7 +42,7 @@ app.post("/:platform/:leagueId/team/:teamID/roster", (req, res) => {
 });
 
 //free agents
-app.post("/:username/:platform/:leagueId/freeagents/roster", (req, res) => {
+app.post("/:platform/:leagueId/freeagents/roster", (req, res) => {
 	let body = "";
 	req.on("data", (chunk) => {
 		body += chunk.toString();
