@@ -57,7 +57,7 @@ app.post(
 					const { teamStatInfoList: teamStats } = JSON.parse(body);
 
 					teamStats.forEach((stat) => {
-						writeOut += stat;
+						writeOut += JSON.stringify(stat);
 					});
 					break;
 				}
@@ -66,7 +66,7 @@ app.post(
 						body
 					);
 					defensiveStats.forEach((stat) => {
-						writeOut += stat;
+						writeOut += JSON.stringify(stat);
 					});
 					break;
 				}
@@ -76,7 +76,7 @@ app.post(
 							body
 						);
 						puntingStats.forEach((stat) => {
-							writeOut += stat;
+							writeOut += JSON.stringify(stat);
 						});
 					} catch (err) {
 						console.log(err);
@@ -91,7 +91,7 @@ app.post(
 					try {
 						const stats = JSON.parse(body)[property];
 						stats.forEach((stat) => {
-							writeOut += stat;
+							writeOut += JSON.stringify(stat);
 						});
 					} catch (err) {
 						console.log(err + " property:" + property);
@@ -99,7 +99,6 @@ app.post(
 					break;
 				}
 			}
-			writeOut = JSON.stringify(writeOut);
 			//console.log(body)
 			fs.writeFile(`../src/data/week${weekNum}Info.json`, writeOut, function (
 				err
