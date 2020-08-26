@@ -28,6 +28,8 @@ app.post(
 	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
 		console.log("weekly info path: " + req.params.dataType);
+		let weekNum = req.params.weekNumber);
+
 		let body = "";
 		const {
 			params: { username, leagueId, weekType, weekNumber, dataType },
@@ -64,12 +66,17 @@ app.post(
 					break;
 				}
 				case "punting": {
+					try{
 					const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
 						body
 					);
 					puntingStats.forEach((stat) => {
 						writeOut += stat;
 					});
+					}
+					catch(err){
+						console.log(err)
+					}
 					break;
 				}
 				default: {
@@ -82,7 +89,7 @@ app.post(
 				}
 			}
 			//console.log(body)
-			fs.writeFile("../src/data/weeklyInfo.json", writeOut, function (err) {
+			fs.writeFile(`../src/data/week${weekNum}Info.json`, writeOut, function (err) {
 				if (err) {
 					return console.log(err);
 				} else {
