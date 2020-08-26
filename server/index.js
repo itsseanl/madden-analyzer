@@ -23,7 +23,7 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 	});
 });
 
-app.post("/:platform/:leagueId/roster", (req, res) => {
+app.post("/:platform/:leagueId/team/:teamID/roster", (req, res) => {
 	let body = "";
 	const weekNumber = req.query.weekNumber;
 	req.on("data", (chunk) => {
