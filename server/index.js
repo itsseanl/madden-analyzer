@@ -79,11 +79,15 @@ app.post(
 					break;
 				}
 				default: {
-					const property = `player${dataType}StatInfoList`;
-					const stats = JSON.parse(body)[property];
-					stats.forEach((stat) => {
-						writeOut += stat;
-					});
+					try {
+						const property = `player${dataType}StatInfoList`;
+						const stats = JSON.parse(body)[property];
+						stats.forEach((stat) => {
+							writeOut += stat;
+						});
+					} catch (err) {
+						console.log(err + " property:" + property);
+					}
 					break;
 				}
 			}
