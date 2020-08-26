@@ -51,6 +51,19 @@ app.post(
 				case "schedules": {
 					const { gameScheduleInfoList: schedules } = JSON.parse(body);
 					writeOut += schedules;
+					fs.writeFile(
+						`../src/data/week${weekNum}schedulesInfo.json`,
+						writeOut,
+						function (err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								res.sendStatus(200);
+
+								return console.log("wrote weekly data successfully");
+							}
+						}
+					);
 					break;
 				}
 				case "teamstats": {
@@ -59,6 +72,19 @@ app.post(
 					teamStats.forEach((stat) => {
 						writeOut += JSON.stringify(stat);
 					});
+					fs.writeFile(
+						`../src/data/week${weekNum}teamStatsInfo.json`,
+						writeOut,
+						function (err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								res.sendStatus(200);
+
+								return console.log("wrote weekly data successfully");
+							}
+						}
+					);
 					break;
 				}
 				case "defense": {
@@ -68,6 +94,19 @@ app.post(
 					defensiveStats.forEach((stat) => {
 						writeOut += JSON.stringify(stat);
 					});
+					fs.writeFile(
+						`../src/data/week${weekNum}defensiveStatsInfo.json`,
+						writeOut,
+						function (err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								res.sendStatus(200);
+
+								return console.log("wrote weekly data successfully");
+							}
+						}
+					);
 					break;
 				}
 				case "punting": {
@@ -78,6 +117,19 @@ app.post(
 						puntingStats.forEach((stat) => {
 							writeOut += JSON.stringify(stat);
 						});
+						fs.writeFile(
+							`../src/data/week${weekNum}puntingStatsInfo.json`,
+							writeOut,
+							function (err) {
+								if (err) {
+									return console.log(err);
+								} else {
+									res.sendStatus(200);
+
+									return console.log("wrote weekly data successfully");
+								}
+							}
+						);
 					} catch (err) {
 						console.log(err);
 					}
@@ -93,6 +145,19 @@ app.post(
 						stats.forEach((stat) => {
 							writeOut += JSON.stringify(stat);
 						});
+						fs.writeFile(
+							`../src/data/week${weekNum + property}Info.json`,
+							writeOut,
+							function (err) {
+								if (err) {
+									return console.log(err);
+								} else {
+									res.sendStatus(200);
+
+									return console.log("wrote weekly data successfully");
+								}
+							}
+						);
 					} catch (err) {
 						console.log(err + " property:" + property);
 					}
@@ -100,17 +165,6 @@ app.post(
 				}
 			}
 			//console.log(body)
-			fs.writeFile(`../src/data/week${weekNum}Info.json`, writeOut, function (
-				err
-			) {
-				if (err) {
-					return console.log(err);
-				} else {
-					res.sendStatus(200);
-
-					return console.log("wrote weekly data successfully");
-				}
-			});
 		});
 	}
 );
