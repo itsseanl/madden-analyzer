@@ -40,12 +40,47 @@ app.post(
 		});
 		req.on("end", () => {
 			let writeOut = "";
-			const property = `player${dataType}StatInfoList`;
-			const stats = JSON.parse(body)[property];
-			stats.forEach((stat) => {
-				writeOut += stat;
-			});
+			switch (dataType) {
+				case "schedules": {
+					const { gameScheduleInfoList: schedules } = JSON.parse(body);
+					writeOut += schedules;
+					break;
+				}
+				case "teamstats": {
+					const { teamStatInfoList: teamStats } = JSON.parse(body);
 
+					teamStats.forEach((stat) => {
+						writeOut += stat;
+					});
+					break;
+				}
+				case "defense": {
+					const { playerDefensiveStatInfoList: defensiveStats } = JSON.parse(
+						body
+					);
+					defensiveStats.forEach((stat) => {
+						writeOut += stat;
+					});
+					break;
+				}
+				case "punting": {
+					const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
+						body
+					);
+					puntingStats.forEach((stat) => {
+						writeOut += stat;
+					});
+					break;
+				}
+				default: {
+					const property = `player${dataType}StatInfoList`;
+					const stats = JSON.parse(body)[property];
+					stats.forEach((stat) => {
+						writeOut += stat;
+					});
+					break;
+				}
+			}
 			//console.log(body)
 			fs.writeFile("../src/data/weeklyInfo.json", writeOut, function (err) {
 				if (err) {
