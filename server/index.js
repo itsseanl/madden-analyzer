@@ -15,11 +15,35 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 			if (err) {
 				return console.log(err);
 			} else {
-				return console.log("wrote file successfully");
+				res.sendStatus(200);
+
+				return console.log("wrote teamData successfully");
 			}
 		});
 	});
 });
+
+app.post(
+	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
+	(req, res) => {
+		let body = "";
+		const weekNumber = req.query.weekNumber;
+		req.on("data", (chunk) => {
+			body += chunk.toString();
+		});
+		req.on("end", () => {
+			fs.writeFile(`../src/data/week${weekNumber}.json`, body, function (err) {
+				if (err) {
+					return console.log(err);
+				} else {
+					res.sendStatus(200);
+
+					return console.log("wrote weekly stats successfully");
+				}
+			});
+		});
+	}
+);
 //start server
 app.listen(port);
 console.log("Server Started ");
