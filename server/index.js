@@ -25,7 +25,7 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 
 //weekly info
 app.post(
-	"/:username/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
+	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
 		let body = "";
 		req.on("data", (chunk) => {
