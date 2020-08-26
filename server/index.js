@@ -42,9 +42,6 @@ app.post(
 			let writeOut = "";
 			switch (dataType) {
 				case "schedules": {
-					const weekRef = ref.child(
-						`${basePath}schedules/${weekType}/${weekNumber}`
-					);
 					const { gameScheduleInfoList: schedules } = JSON.parse(body);
 					writeOut += schedules;
 					break;
@@ -52,9 +49,6 @@ app.post(
 				case "teamstats": {
 					const { teamStatInfoList: teamStats } = JSON.parse(body);
 					teamStats.forEach((stat) => {
-						const weekRef = ref.child(
-							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/team-stats`
-						);
 						writeOut += stat;
 					});
 					break;
@@ -64,9 +58,6 @@ app.post(
 						body
 					);
 					defensiveStats.forEach((stat) => {
-						const weekRef = ref.child(
-							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
-						);
 						writeOut += stat;
 					});
 					break;
@@ -77,9 +68,6 @@ app.post(
 					)}StatInfoList`;
 					const stats = JSON.parse(body)[property];
 					stats.forEach((stat) => {
-						const weekRef = ref.child(
-							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
-						);
 						writeOut += stat;
 					});
 					break;
