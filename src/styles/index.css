@@ -11,3 +11,7 @@ body {
 .standing {
 	padding-left: 0.5rem;
 }
+
+.headcol:before {
+	content: "Row ";
+}

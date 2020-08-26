@@ -22235,6 +22235,10 @@ body {
   padding-left: 0.5rem;
 }
 
+.headcol:before {
+  content: "Row ";
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

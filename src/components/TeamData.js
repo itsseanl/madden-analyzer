@@ -33,23 +33,29 @@ const TeamData = () => {
 					</select>
 				</div>
 			</div>
-			<div className="teamData w-10/12 h-64  overflow-y-scroll my-5 overflow-x-scroll m-auto border-gray-200 border-2 border-opacity-100 ">
-				<table className="table-fixed w-auto  m-auto relative border-collapse top-0 z-40 ">
+			<div className="teamData w-10/12 h-64  overflow-y-scroll my-5 overflow-x-scroll m-auto border-gray-200  border-opacity-100 ">
+				<table className="table-fixed w-auto  m-auto border-collapse top-0 ">
 					<thead>
 						<tr>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400 ">Team</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Rank</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Seed</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">OVR</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Wins</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Losses</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Ties</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Off. Yds</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Pass</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Run</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Def. Yds</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Pass</th>
-							<th className="px-4 py-2 sticky top-0 bg-gray-400">Run</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10 ">Team</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Rank</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Seed</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">OVR</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Wins</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">
+								Losses
+							</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Ties</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">
+								Off. Yds
+							</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Pass</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Run</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">
+								Def. Yds
+							</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Pass</th>
+							<th className="px-4 py-2 sticky top-0 bg-gray-400 z-10">Run</th>
 						</tr>
 					</thead>
 					{sortVal && <SortedData sortVal={sortVal} />}

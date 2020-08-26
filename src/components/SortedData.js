@@ -28,7 +28,9 @@ const SortedData = ({ sortVal }) => {
 				return (
 					<>
 						<tr class="">
-							<td className="border px-4 py-2 bg-gray-100">{team.teamName}</td>
+							<td className="border px-4 py-2 bg-gray-100 sticky left-0 z-1">
+								{team.teamName}
+							</td>
 							<td className="border px-4 py-2 flex justify-between items-center">
 								{team.rank} <span className={color}>{standing}</span>
 							</td>
