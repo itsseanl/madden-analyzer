@@ -27,7 +27,7 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 app.post(
 	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
-		console.log("weekly info path: " + req.params.dataType);
+		console.log("weekly info path: " + req.params.dataType;
 		let weekNum = req.params.weekNumber);
 
 		let body = "";
