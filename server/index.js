@@ -63,9 +63,7 @@ app.post(
 					break;
 				}
 				default: {
-					const property = `player${capitalizeFirstLetter(
-						dataType
-					)}StatInfoList`;
+					const property = `player${dataType}StatInfoList`;
 					const stats = JSON.parse(body)[property];
 					stats.forEach((stat) => {
 						writeOut += stat;
