@@ -23,6 +23,11 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 	});
 });
 
+//
+function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 //weekly info
 app.post(
 	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
@@ -79,7 +84,9 @@ app.post(
 					break;
 				}
 				default: {
-					const property = `player${dataType}StatInfoList`;
+					const property = `player${capitalizeFirstLetter(
+						dataType
+					)}StatInfoList`;
 
 					try {
 						const stats = JSON.parse(body)[property];
