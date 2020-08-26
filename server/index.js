@@ -114,9 +114,7 @@ app.post(
 						const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
 							body
 						);
-						puntingStats.forEach((stat) => {
-							writeOut += JSON.stringify(stat);
-						});
+						writeOut += JSON.stringify(puntingStats);
 						fs.writeFile(
 							`../src/data/week${weekNum}puntingStatsInfo.json`,
 							writeOut,
