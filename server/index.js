@@ -27,7 +27,7 @@ app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 app.post(
 	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
-		console.log("weekly info path: " + req.path);
+		console.log("weekly info path: " + req.params.dataType);
 		let body = "";
 		const basePath = `data/${leagueId}/`;
 		// "defense", "kicking", "passing", "punting", "receiving", "rushing"
@@ -36,8 +36,54 @@ app.post(
 			body += chunk.toString();
 		});
 		req.on("end", () => {
+			let writeOut = "";
+			switch (dataType) {
+				case "schedules": {
+					const weekRef = ref.child(
+						`${basePath}schedules/${weekType}/${weekNumber}`
+					);
+					const { gameScheduleInfoList: schedules } = JSON.parse(body);
+					writeOut += schedules;
+					break;
+				}
+				case "teamstats": {
+					const { teamStatInfoList: teamStats } = JSON.parse(body);
+					teamStats.forEach((stat) => {
+						const weekRef = ref.child(
+							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/team-stats`
+						);
+						writeOut += stat;
+					});
+					break;
+				}
+				case "defense": {
+					const { playerDefensiveStatInfoList: defensiveStats } = JSON.parse(
+						body
+					);
+					defensiveStats.forEach((stat) => {
+						const weekRef = ref.child(
+							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
+						);
+						writeOut += stat;
+					});
+					break;
+				}
+				default: {
+					const property = `player${capitalizeFirstLetter(
+						dataType
+					)}StatInfoList`;
+					const stats = JSON.parse(body)[property];
+					stats.forEach((stat) => {
+						const weekRef = ref.child(
+							`${statsPath}/${weekType}/${weekNumber}/${stat.teamId}/player-stats/${stat.rosterId}`
+						);
+						writeOut += stat;
+					});
+					break;
+				}
+			}
 			//console.log(body)
-			fs.writeFile("../src/data/weeklyInfo.json", body, function (err) {
+			fs.writeFile("../src/data/weeklyInfo.json", writeOut, function (err) {
 				if (err) {
 					return console.log(err);
 				} else {
