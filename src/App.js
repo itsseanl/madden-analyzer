@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import DataTable from "./components/DataTable";
+import FileUpload from "./components/FileUpload";
 import Parrot from "./football_parrot.gif";
 import teamData from "./data/teamData.json";
 import freeAgents from "./data/freeAgents.json";
@@ -185,6 +186,7 @@ function App() {
 					Madden Stats Baybeee
 				</h1>
 			</header>
+			<FileUpload />
 			<DataTable
 				tableTitle={"Team Data"}
 				dataOptions={teamOptions}

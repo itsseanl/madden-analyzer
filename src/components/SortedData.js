@@ -3,7 +3,14 @@ import { FaCaretUp, FaCaretDown, FaEquals } from "react-icons/fa";
 
 const SortedData = ({ sortVal, displayData, dataOptions, teamNameID }) => {
 	const data = displayData;
-	const lessGood = ["rank", "seed", "defTotalYds", "defPassYds", "defRushYds"];
+	const lessGood = [
+		"rank",
+		"seed",
+		"defTotalYds",
+		"defPassYds",
+		"defRushYds",
+		"age",
+	];
 	if (lessGood.includes(sortVal)) {
 		data.sort((a, b) => a[sortVal] - b[sortVal]);
 	} else {
