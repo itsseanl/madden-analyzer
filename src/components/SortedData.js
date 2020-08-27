@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import teamData from "../data/teamData.json";
 import { FaCaretUp, FaCaretDown, FaEquals } from "react-icons/fa";
 
-const SortedData = ({ sortVal }) => {
-	const data = teamData.teamStandingInfoList;
+const SortedData = ({ sortVal, displayData, dataOptions }) => {
+	const data = displayData;
 	const lessGood = ["rank", "seed", "defTotalYds", "defPassYds", "defRushYds"];
 	if (lessGood.includes(sortVal)) {
 		data.sort((a, b) => a[sortVal] - b[sortVal]);
@@ -28,7 +27,23 @@ const SortedData = ({ sortVal }) => {
 				return (
 					<>
 						<tr class="">
-							<td className="border px-4 py-2 bg-gray-100 sticky left-0 z-1">
+							{Object.keys(dataOptions).map((key) => {
+								return (
+									<>
+										{key == "teamName" ||
+										key == "firstName" ||
+										key == "lastName" ? (
+											<td className="px-4 py-2  bg-gray-400 sticky left-0 z-1">
+												{team[key]}
+											</td>
+										) : (
+											<td className="px-4 py-2 ">{team[key]}</td>
+										)}
+									</>
+								);
+							})}
+
+							{/* <td className="border px-4 py-2 bg-gray-100 sticky left-0 z-1">
 								{team.teamName}
 							</td>
 							<td className="border px-4 py-2 flex justify-between items-center">
@@ -44,7 +59,7 @@ const SortedData = ({ sortVal }) => {
 							<td className="border px-4 py-2">{team.offRushYds}</td>
 							<td className="border px-4 py-2">{team.defTotalYds}</td>
 							<td className="border px-4 py-2">{team.defPassYds}</td>
-							<td className="border px-4 py-2">{team.defRushYds}</td>
+							<td className="border px-4 py-2">{team.defRushYds}</td> */}
 						</tr>
 					</>
 				);
