@@ -33,7 +33,7 @@ const SortedData = ({ sortVal, displayData, dataOptions, teamNameID }) => {
 				}
 				return (
 					<>
-						<tr class="">
+						<tr>
 							{Object.keys(dataOptions).map((key) => {
 								let theClasses = "px-4 py-2";
 								let theContent = team[key];
