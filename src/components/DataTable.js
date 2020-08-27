@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import SortedData from "./SortedData";
-const DataTable = ({ dataOptions, displayData }) => {
+const DataTable = ({ tableTitle, dataOptions, displayData, teamNameID }) => {
 	const [sortVal, setSortVal] = useState("sort");
-	useEffect(() => {
-		console.log("sort value changed: " + sortVal);
-	}, [sortVal]);
-	console.log(dataOptions);
+	let week = "";
+	if (displayData[0].weekIndex) {
+		week = " Week " + displayData[0].weekIndex;
+	}
 	return (
 		<>
-			<div className="bg-gray-400 p-5 top-0 ">
+			<div className="bg-gray-400 p-5 top-0 sticky z-40">
 				<div className="lg:px-5 w-11/12 lg:w-9/12 flex justify-between m-auto">
-					<h2 className=" text-2xl font-bold">Team Data</h2>
+					<h2 className=" text-2xl font-bold">{tableTitle + week}</h2>
 					<select
 						onChange={(e) => setSortVal(e.target.value)}
 						className="lock appearance-none w-2/5 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
@@ -25,7 +25,10 @@ const DataTable = ({ dataOptions, displayData }) => {
 					</select>
 				</div>
 			</div>
-			<div className="teamData w-10/12 h-64 overflow-y-scroll my-5 overflow-x-scroll m-auto border-gray-200  border-opacity-100 ">
+			<div
+				className="teamData w-10/12 overflow-y-scroll my-5 overflow-x-scroll m-auto border-gray-200  border-opacity-100 "
+				style={{ height: "500px" }}
+			>
 				<table className="table-fixed w-auto  m-auto border-collapse top-0 ">
 					<thead>
 						<tr>
@@ -43,6 +46,7 @@ const DataTable = ({ dataOptions, displayData }) => {
 							sortVal={sortVal}
 							dataOptions={dataOptions}
 							displayData={displayData}
+							teamNameID={teamNameID}
 						/>
 					)}
 				</table>

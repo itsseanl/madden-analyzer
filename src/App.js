@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import DataTable from "./components/DataTable";
 import Parrot from "./football_parrot.gif";
 import teamData from "./data/teamData.json";
 import freeAgents from "./data/freeAgents.json";
+import defensiveData from "./data/defensiveStatsInfo.json";
 
 function App() {
+	let teamNameID = {};
 	//team data displayed attributes
 	const teamOptions = {
 		teamName: "Team",
@@ -154,6 +156,27 @@ function App() {
 		zoneCoverRating: "Zone Coverage",
 	};
 
+	const defensiveStats = {
+		fullName: "Name",
+		teamId: "Team",
+		defCatchAllowed: "Catch Allowed",
+		defDeflections: "Deflections",
+		defForcedFum: "Forced Fumbles",
+		defFumRec: "Fumble Recoveries",
+		defInts: "Interceptions",
+		defIntReturnYds: "Interception Return Yards",
+		defPts: "Points",
+		defSacks: "Sacks",
+		defSafeties: "Safeties",
+		defTDs: "TDs",
+		defTotalTackles: "Tackels",
+		stageIndex: "Stage Index (??)",
+		weekIndex: "Week Index",
+	};
+
+	teamData.teamStandingInfoList.map((team) => {
+		return (teamNameID[team.teamId] = team.teamName);
+	});
 	return (
 		<div className="App">
 			<header className="App-header flex flex-col justify-center content-center bg-gray-800">
@@ -163,12 +186,22 @@ function App() {
 				</h1>
 			</header>
 			<DataTable
+				tableTitle={"Team Data"}
 				dataOptions={teamOptions}
 				displayData={teamData.teamStandingInfoList}
+				teamNameID={teamNameID}
 			/>
 			<DataTable
+				tableTitle={"Free Agents"}
 				dataOptions={freeAgentOptions}
 				displayData={freeAgents.rosterInfoList}
+				teamNameID={teamNameID}
+			/>
+			<DataTable
+				tableTitle={"Defensive Stats"}
+				dataOptions={defensiveStats}
+				displayData={defensiveData}
+				teamNameID={teamNameID}
 			/>
 		</div>
 	);

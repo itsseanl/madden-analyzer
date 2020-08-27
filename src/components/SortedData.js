@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaCaretUp, FaCaretDown, FaEquals } from "react-icons/fa";
 
-const SortedData = ({ sortVal, displayData, dataOptions }) => {
+const SortedData = ({ sortVal, displayData, dataOptions, teamNameID }) => {
 	const data = displayData;
 	const lessGood = ["rank", "seed", "defTotalYds", "defPassYds", "defRushYds"];
 	if (lessGood.includes(sortVal)) {
@@ -28,38 +28,37 @@ const SortedData = ({ sortVal, displayData, dataOptions }) => {
 					<>
 						<tr class="">
 							{Object.keys(dataOptions).map((key) => {
+								let theClasses = "px-4 py-2";
+								let theContent = team[key];
+								const rankingList = ["rank"];
+								if (
+									key == "teamName" ||
+									key == "lastName" ||
+									key == "fullName"
+								) {
+									theClasses = "px-4 py-2  bg-gray-400 sticky left-0 z-1";
+								}
+								if (key == "rank") {
+									theClasses = "px-4 py-2 flex justify-between items-center";
+								}
+								if (key == "teamId") {
+									Object.keys(teamNameID).map((teamKey) => {
+										if (team[key] == teamKey) {
+											return (theContent = teamNameID[teamKey]);
+										}
+									});
+								}
 								return (
 									<>
-										{key == "teamName" ||
-										key == "firstName" ||
-										key == "lastName" ? (
-											<td className="px-4 py-2  bg-gray-400 sticky left-0 z-1">
-												{team[key]}
-											</td>
-										) : (
-											<td className="px-4 py-2 ">{team[key]}</td>
-										)}
+										<td className={theClasses}>
+											{theContent}{" "}
+											{rankingList.includes(key) ? (
+												<span className={color}>{standing}</span>
+											) : null}
+										</td>
 									</>
 								);
 							})}
-
-							{/* <td className="border px-4 py-2 bg-gray-100 sticky left-0 z-1">
-								{team.teamName}
-							</td>
-							<td className="border px-4 py-2 flex justify-between items-center">
-								{team.rank} <span className={color}>{standing}</span>
-							</td>
-							<td className="border px-4 py-2">{team.seed}</td>
-							<td className="border px-4 py-2">{team.teamOvr}</td>
-							<td className="border px-4 py-2">{team.totalWins}</td>
-							<td className="border px-4 py-2">{team.totalLosses}</td>
-							<td className="border px-4 py-2">{team.totalTies}</td>
-							<td className="border px-4 py-2">{team.offTotalYds}</td>
-							<td className="border px-4 py-2">{team.offPassYds}</td>
-							<td className="border px-4 py-2">{team.offRushYds}</td>
-							<td className="border px-4 py-2">{team.defTotalYds}</td>
-							<td className="border px-4 py-2">{team.defPassYds}</td>
-							<td className="border px-4 py-2">{team.defRushYds}</td> */}
 						</tr>
 					</>
 				);

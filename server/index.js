@@ -107,6 +107,19 @@ app.post(
 							}
 						}
 					);
+					fs.writeFile(
+						`../src/data/defensiveStatsInfo.json`,
+						writeOut,
+						function (err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								res.sendStatus(200);
+
+								return console.log("wrote weekly data successfully");
+							}
+						}
+					);
 					break;
 				}
 				// case "punting": {
