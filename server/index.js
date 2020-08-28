@@ -262,7 +262,7 @@ app.post(
 						});
 						theFile = {
 							Bucket: "sfuploads/maddenstats",
-							Key: `info.json`,
+							Key: `${property}info.json`,
 							Body: body,
 							ACL: "public-read",
 						};
