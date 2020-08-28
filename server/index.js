@@ -31,10 +31,7 @@ app.post("/:platform/2177319/:leagueteams", (req, res) => {
 		// });
 		let theFile = {
 			Bucket: "sfuploads/maddenstats",
-			Key:
-				Math.floor(Math.random() * 10) +
-				Math.floor(Math.random() * 10) +
-				"teamData.json",
+			Key: "teamData.json",
 			Body: body,
 			ACL: "public-read",
 		};

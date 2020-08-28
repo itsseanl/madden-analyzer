@@ -226,28 +226,39 @@ function App() {
 		stageIndex: "Stage",
 		weekIndex: "Week",
 	};
-	const [teamData, setTeamData] = useState({});
+	const [teamData, setTeamData] = useState(null);
 	const [teamNameID, setTeamNameID] = useState({});
 
 	useEffect(() => {
-		let nameID = {};
-		teamData.teamStandingInfoList.map((team) => {
-			return (nameID[team.teamId] = team.teamName);
-		});
-		setTeamNameID(nameID);
+		if (teamData) {
+			let nameID = {};
+			let theTeamData = teamData;
+			console.log(theTeamData);
+
+			theTeamData.teamStandingInfoList.map((team) => {
+				nameID[team.teamId] = team.teamName;
+			});
+			setTeamNameID(nameID);
+		}
 	}, [teamData]);
 
-	fetch(
-		"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
-		{
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-		}
-	)
-		.then((response) => response.json())
-		.then((data) => setTeamData(data));
+	useEffect(() => {
+		fetch(
+			"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/octet-stream",
+					Accept: "application/octet-stream",
+				},
+			}
+		)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				setTeamData(data);
+			});
+	}, []);
 
 	return (
 		<div className="App">
@@ -266,7 +277,7 @@ function App() {
 				</div>
 			</div>
 			<FileUpload />
-			{teamNameID ? (
+			{teamData && teamNameID ? (
 				<DataTable
 					tableTitle={"Team Data"}
 					dataOptions={teamOptions}
