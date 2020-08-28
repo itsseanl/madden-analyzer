@@ -11,7 +11,7 @@ app.post("/:platform/2177319/:leagueteams", (req, res) => {
 	});
 	req.on("end", () => {
 		//console.log(body)
-		fs.writeFile("../src/data/teamData.json", body, function (err) {
+		fs.writeFile("../public/data/teamData.json", body, function (err) {
 			if (err) {
 				return console.log(err);
 			} else {
@@ -52,7 +52,7 @@ app.post(
 					const { gameScheduleInfoList: schedules } = JSON.parse(body);
 					writeOut += schedules;
 					fs.writeFile(
-						`../src/data/week${weekNum}schedulesInfo.json`,
+						`../public/data/week${weekNum}schedulesInfo.json`,
 						writeOut,
 						function (err) {
 							if (err) {
@@ -62,7 +62,7 @@ app.post(
 							}
 						}
 					);
-					fs.writeFile(`../src/data/schedulesInfo.json`, writeOut, function (
+					fs.writeFile(`../public/data/schedulesInfo.json`, writeOut, function (
 						err
 					) {
 						if (err) {
@@ -81,7 +81,7 @@ app.post(
 					writeOut += JSON.stringify(teamStats);
 					//});
 					fs.writeFile(
-						`../src/data/week${weekNum}teamStatsInfo.json`,
+						`../public/data/week${weekNum}teamStatsInfo.json`,
 						writeOut,
 						function (err) {
 							if (err) {
@@ -91,7 +91,7 @@ app.post(
 							}
 						}
 					);
-					fs.writeFile(`../src/data/teamStatsInfo.json`, writeOut, function (
+					fs.writeFile(`../public/data/teamStatsInfo.json`, writeOut, function (
 						err
 					) {
 						if (err) {
@@ -112,7 +112,7 @@ app.post(
 					writeOut += JSON.stringify(defensiveStats);
 					// });
 					fs.writeFile(
-						`../src/data/week${weekNum}defensiveStatsInfo.json`,
+						`../public/data/week${weekNum}defensiveStatsInfo.json`,
 						writeOut,
 						function (err) {
 							if (err) {
@@ -123,7 +123,7 @@ app.post(
 						}
 					);
 					fs.writeFile(
-						`../src/data/defensiveStatsInfo.json`,
+						`../public/data/defensiveStatsInfo.json`,
 						writeOut,
 						function (err) {
 							if (err) {
@@ -148,7 +148,7 @@ app.post(
 						writeOut += JSON.stringify(stats);
 						//	});
 						fs.writeFile(
-							`../src/data/week${weekNum + property}Info.json`,
+							`../public/data/week${weekNum + property}Info.json`,
 							writeOut,
 							function (err) {
 								if (err) {
@@ -158,7 +158,7 @@ app.post(
 								}
 							}
 						);
-						fs.writeFile(`../src/data/Info.json`, writeOut, function (err) {
+						fs.writeFile(`../public/data/Info.json`, writeOut, function (err) {
 							if (err) {
 								return console.log(err);
 							} else {
@@ -185,7 +185,7 @@ app.post("/:platform/2177319/team/:teamID/roster", (req, res) => {
 		body += chunk.toString();
 	});
 	req.on("end", () => {
-		fs.writeFile(`../src/data/teamRosters.json`, body, function (err) {
+		fs.writeFile(`../public/data/teamRosters.json`, body, function (err) {
 			if (err) {
 				return console.log(err);
 			} else {
@@ -204,7 +204,7 @@ app.post("/:platform/2177319/freeagents/roster", (req, res) => {
 		body += chunk.toString();
 	});
 	req.on("end", () => {
-		fs.writeFile(`../src/data/freeAgents.json`, body, function (err) {
+		fs.writeFile(`../public/data/freeAgents.json`, body, function (err) {
 			if (err) {
 				return console.log(err);
 			} else {
