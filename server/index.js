@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 8080;
 const fs = require("fs");
-import AWS from "aws-sdk";
+var AWS = "aws-sdk";
 
 const spacesEndpoint = new AWS.Endpoint("nyc3.digitaloceanspaces.com");
 	const s3 = new AWS.S3({
