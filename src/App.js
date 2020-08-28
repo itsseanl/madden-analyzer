@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataTable from "./components/DataTable";
 import FileUpload from "./components/FileUpload";
 import Parrot from "./football_parrot.gif";
-
+import Loading from "./2.gif";
 function App() {
 	//team data displayed attributes
 	const teamOptions = {
@@ -334,12 +334,6 @@ function App() {
 			});
 	}, []);
 
-	// import teamData from "./teamData.json";
-	// import freeAgents from "./freeAgents.json";
-	// import defensiveData from "./defensiveStatsInfo.json";
-	// import passingData from "./playerPassingStatInfoListInfo";
-	// import receivingData from "./playerReceivingStatInfoListInfo";
-	// import rushingData from "./playerRushingStatInfoListInfo";
 	return (
 		<div className="App">
 			<header className="App-header flex flex-col justify-center content-center bg-gray-800">
@@ -404,7 +398,7 @@ function App() {
 					/>
 				</>
 			) : (
-				<></>
+				<img src={Loading} alt="loading" className="m-auto py-10" />
 			)}
 		</div>
 	);
