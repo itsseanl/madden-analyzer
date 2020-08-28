@@ -58,12 +58,20 @@ app.post(
 							if (err) {
 								return console.log(err);
 							} else {
-								res.sendStatus(200);
-
 								return console.log("wrote weekly data successfully");
 							}
 						}
 					);
+					fs.writeFile(`../src/data/schedulesInfo.json`, writeOut, function (
+						err
+					) {
+						if (err) {
+							return console.log(err);
+						} else {
+							res.sendStatus(200);
+							return console.log("wrote weekly data successfully");
+						}
+					});
 					break;
 				}
 				case "teamstats": {
@@ -79,12 +87,21 @@ app.post(
 							if (err) {
 								return console.log(err);
 							} else {
-								res.sendStatus(200);
-
 								return console.log("wrote weekly data successfully");
 							}
 						}
 					);
+					fs.writeFile(`../src/data/teamStatsInfo.json`, writeOut, function (
+						err
+					) {
+						if (err) {
+							return console.log(err);
+						} else {
+							res.sendStatus(200);
+
+							return console.log("wrote weekly data successfully");
+						}
+					});
 					break;
 				}
 				case "defense": {
@@ -101,8 +118,6 @@ app.post(
 							if (err) {
 								return console.log(err);
 							} else {
-								res.sendStatus(200);
-
 								return console.log("wrote weekly data successfully");
 							}
 						}
@@ -139,8 +154,6 @@ app.post(
 								if (err) {
 									return console.log(err);
 								} else {
-									res.sendStatus(200);
-
 									return console.log("wrote weekly data successfully");
 								}
 							}
