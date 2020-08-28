@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SortedData from "./SortedData";
 const DataTable = ({ tableTitle, dataOptions, displayData, teamNameID }) => {
 	const [sortVal, setSortVal] = useState("sort");

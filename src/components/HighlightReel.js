@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import AWS from "aws-sdk";
+import React, { useState } from "react";
 import { FaCaretRight, FaCaretLeft } from "react-icons/fa";
 
 const HighlightReel = ({ videoLinks }) => {
@@ -37,7 +36,7 @@ const HighlightReel = ({ videoLinks }) => {
 					style={{ transform: `translateX(-${translated * 90}vw)` }}
 				>
 					{videoLinks.map((video) => {
-						if (video == "madden/") {
+						if (video === "madden/") {
 							return;
 						} else {
 							return (

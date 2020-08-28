@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaCaretUp, FaCaretDown, FaEquals } from "react-icons/fa";
 
 const SortedData = ({ sortVal, displayData, dataOptions, teamNameID }) => {
@@ -39,18 +39,18 @@ const SortedData = ({ sortVal, displayData, dataOptions, teamNameID }) => {
 								let theContent = team[key];
 								const rankingList = ["rank"];
 								if (
-									key == "teamName" ||
-									key == "lastName" ||
-									key == "fullName"
+									key === "teamName" ||
+									key === "lastName" ||
+									key === "fullName"
 								) {
 									theClasses = "px-4 py-2  bg-gray-400 sticky left-0 z-1";
 								}
-								if (key == "rank") {
+								if (key === "rank") {
 									theClasses = "px-4 py-2 flex justify-between items-center";
 								}
-								if (key == "teamId") {
+								if (key === "teamId") {
 									Object.keys(teamNameID).map((teamKey) => {
-										if (team[key] == teamKey) {
+										if (team[key] === teamKey) {
 											return (theContent = teamNameID[teamKey]);
 										}
 									});

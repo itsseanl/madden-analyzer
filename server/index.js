@@ -3,6 +3,8 @@ var app = express();
 var port = process.env.PORT || 8080;
 const fs = require("fs");
 
+app.use(express.static(`${__dirname}/../build`));
+
 //league info
 app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
 	let body = "";
@@ -215,6 +217,7 @@ app.post("/:platform/:leagueId/freeagents/roster", (req, res) => {
 		});
 	});
 });
+const path = require('path')app.get('*', (req, res)=>{  res.sendFile(path.join(__dirname, '../build/index.html'));})
 
 //start server
 app.listen(port);
