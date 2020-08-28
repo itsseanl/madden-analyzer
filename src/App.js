@@ -2,12 +2,12 @@ import React from "react";
 import DataTable from "./components/DataTable";
 import FileUpload from "./components/FileUpload";
 import Parrot from "./football_parrot.gif";
-import teamData from "./data/teamData.json";
-import freeAgents from "./data/freeAgents.json";
-import defensiveData from "./data/defensiveStatsInfo.json";
-import passingData from "./data/playerPassingStatInfoListInfo";
-import receivingData from "./data/playerReceivingStatInfoListInfo";
-import rushingData from "./data/playerRushingStatInfoListInfo";
+import teamData from "./teamData.json";
+// import freeAgents from "./freeAgents.json";
+// import defensiveData from "./defensiveStatsInfo.json";
+// import passingData from "./playerPassingStatInfoListInfo";
+// import receivingData from "./playerReceivingStatInfoListInfo";
+// import rushingData from "./playerRushingStatInfoListInfo";
 function App() {
 	let teamNameID = {};
 	//team data displayed attributes
@@ -254,7 +254,7 @@ function App() {
 				displayData={teamData.teamStandingInfoList}
 				teamNameID={teamNameID}
 			/>
-			<DataTable
+			{/* <DataTable
 				tableTitle={"Free Agents"}
 				dataOptions={freeAgentOptions}
 				displayData={freeAgents.rosterInfoList}
@@ -284,7 +284,7 @@ function App() {
 				dataOptions={rushingStats}
 				displayData={rushingData}
 				teamNameID={teamNameID}
-			/>
+			/> */}
 		</div>
 	);
 }

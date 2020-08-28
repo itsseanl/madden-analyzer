@@ -2,6 +2,14 @@ var express = require("express");
 var app = express();
 var port = process.env.PORT || 8080;
 const fs = require("fs");
+import AWS from "aws-sdk";
+
+const spacesEndpoint = new AWS.Endpoint("nyc3.digitaloceanspaces.com");
+	const s3 = new AWS.S3({
+		endpoint: spacesEndpoint,
+		accessKeyId: process.env.REACT_APP_DO_ACCESS_KEY,
+		secretAccessKey: process.env.REACT_APP_DO_SECRET_KEY,
+	});
 
 //league info
 app.post("/:platform/2177319/:leagueteams", (req, res) => {
@@ -11,15 +19,34 @@ app.post("/:platform/2177319/:leagueteams", (req, res) => {
 	});
 	req.on("end", () => {
 		//console.log(body)
-		fs.writeFile("../public/data/teamData.json", body, function (err) {
-			if (err) {
-				return console.log(err);
-			} else {
-				res.sendStatus(200);
+	// 	fs.writeFile("../public/data/teamData.json", body, function (err) {
+	// 		if (err) {
+	// 			return console.log(err);
+	// 		} else {
+	// 			res.sendStatus(200);
 
-				return console.log("wrote teamData successfully");
-			}
-		});
+	// 			return console.log("wrote teamData successfully");
+	// 		}
+	// 	});
+	// });
+	let theFile = {
+		Bucket: "sfuploads/maddenstats",
+		Key:
+			Math.floor(Math.random() * 10) +
+			Math.floor(Math.random() * 10) +
+			'teamData.json',
+		Body: data,
+		ACL: "public-read",
+	};
+
+	s3.putObject(theFile, function (err, data) {
+		if (err) {
+			console.log(err, err.stack);
+			
+		} else {
+			console.log("success");
+			
+		}
 	});
 });
 
