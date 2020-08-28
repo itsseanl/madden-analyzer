@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import DataTable from "./components/DataTable";
 import FileUpload from "./components/FileUpload";
 import Parrot from "./football_parrot.gif";
-import teamData from "./teamData.json";
+// import teamData from "./teamData.json";
 // import freeAgents from "./freeAgents.json";
 // import defensiveData from "./defensiveStatsInfo.json";
 // import passingData from "./playerPassingStatInfoListInfo";
 // import receivingData from "./playerReceivingStatInfoListInfo";
 // import rushingData from "./playerRushingStatInfoListInfo";
 function App() {
-	let teamNameID = {};
 	//team data displayed attributes
 	const teamOptions = {
 		teamName: "Team",
@@ -227,10 +226,29 @@ function App() {
 		stageIndex: "Stage",
 		weekIndex: "Week",
 	};
+	const [teamData, setTeamData] = useState({});
+	const [teamNameID, setTeamNameID] = useState({});
 
-	teamData.teamStandingInfoList.map((team) => {
-		return (teamNameID[team.teamId] = team.teamName);
-	});
+	useEffect(() => {
+		let nameID = {};
+		teamData.teamStandingInfoList.map((team) => {
+			return (nameID[team.teamId] = team.teamName);
+		});
+		setTeamNameID(nameID);
+	}, [teamData]);
+
+	fetch(
+		"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
+		{
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+		}
+	)
+		.then((response) => response.json())
+		.then((data) => setTeamData(data));
+
 	return (
 		<div className="App">
 			<header className="App-header flex flex-col justify-center content-center bg-gray-800">
@@ -242,18 +260,23 @@ function App() {
 			<div className="bg-gray-800 p-5 sticky top-0">
 				<div className="lg:px-5 w-11/12 lg:w-9/12 flex justify-center m-auto">
 					<h2 className="text-center text-white">
-						To Update data, Use http://167.172.22.108:8080 in the Madden
+						To Update data, Use http://madden.itsseanl.com/:8080 in the Madden
 						Companion App
 					</h2>
 				</div>
 			</div>
 			<FileUpload />
-			<DataTable
-				tableTitle={"Team Data"}
-				dataOptions={teamOptions}
-				displayData={teamData.teamStandingInfoList}
-				teamNameID={teamNameID}
-			/>
+			{teamNameID ? (
+				<DataTable
+					tableTitle={"Team Data"}
+					dataOptions={teamOptions}
+					displayData={teamData.teamStandingInfoList}
+					teamNameID={teamNameID}
+				/>
+			) : (
+				<></>
+			)}
+
 			{/* <DataTable
 				tableTitle={"Free Agents"}
 				dataOptions={freeAgentOptions}

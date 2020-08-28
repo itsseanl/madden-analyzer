@@ -3,6 +3,7 @@ import SortedData from "./SortedData";
 const DataTable = ({ tableTitle, dataOptions, displayData, teamNameID }) => {
 	const [sortVal, setSortVal] = useState("sort");
 	let week = "";
+	console.log(displayData);
 	if (displayData[0].weekIndex) {
 		week = " Week " + displayData[0].weekIndex;
 	}
