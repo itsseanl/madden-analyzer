@@ -222,7 +222,7 @@ function App() {
 		weekIndex: "Week",
 	};
 	const [teamData, setTeamData] = useState(null);
-	const [teamNameID, setTeamNameID] = useState({});
+	const [teamNameID, setTeamNameID] = useState(null);
 
 	const [freeAgents, setFreeAgents] = useState(null);
 	const [defensiveData, setDefensiveData] = useState(null);
@@ -240,33 +240,11 @@ function App() {
 				nameID[team.teamId] = team.teamName;
 			});
 			setTeamNameID(nameID);
+			console.log(nameID);
 		}
 	}, [teamData]);
 
 	useEffect(() => {
-		// fetch(
-		// 	"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
-		// 	{
-		// 		method: "GET",
-		// 		headers: {
-		// 			"Content-Type": "application/octet-stream",
-		// 			Accept: "application/octet-stream",
-		// 		},
-		// 	}
-		// )
-		// 	.then((response) => response.json())
-		// 	.then((data) => {
-		// 		console.log(data);
-		// 		setTeamData(data);
-		// 	});
-		// let [
-		// 	theTeamData,
-		// 	theTeamRoster,
-		// 	defStats,
-		// 	passStats,
-		// 	recStats,
-		// 	rushStats,
-		// ] =
 		Promise.all([
 			fetch(
 				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
@@ -342,53 +320,18 @@ function App() {
 				// Log the data to the console
 				// You would do something with both sets of data here
 				console.log(data);
+				console.log(data[0].teamStandingInfoList);
+				setTeamData(data[0]);
+				setFreeAgents(data[1]);
+				setDefensiveData(data[2]);
+				setPassingData(data[3]);
+				setReceivingData(data[4]);
+				setRushingData(data[5]);
 			})
 			.catch(function (error) {
 				// if there's an error, log it
 				console.log(error);
 			});
-		// .then(
-		// 	(
-		// 		theTeamData,
-		// 		theTeamRoster,
-		// 		defStats,
-		// 		passStats,
-		// 		recStats,
-		// 		rushStats
-		// 	) => {
-		// 		theTeamData.json();
-		// 		theTeamRoster.json();
-		// 		defStats.json();
-		// 		passStats.json();
-		// 		recStats.json();
-		// 		rushStats.json();
-		// 	}
-		// )
-		// .then(
-		// 	(
-		// 		theTeamData,
-		// 		theTeamRoster,
-		// 		defStats,
-		// 		passStats,
-		// 		recStats,
-		// 		rushStats
-		// 	) => {
-		// 		console.log(
-		// 			theTeamData,
-		// 			theTeamRoster,
-		// 			defStats,
-		// 			passStats,
-		// 			recStats,
-		// 			rushStats
-		// 		);
-		// 		setTeamData(theTeamData);
-		// 		setFreeAgents(theTeamRoster);
-		// 		setDefensiveData(defStats);
-		// 		setPassingData(passStats);
-		// 		setReceivingData(recStats);
-		// 		setReceivingData(rushStats);
-		// 	}
-		// );
 	}, []);
 
 	// import teamData from "./teamData.json";
@@ -397,7 +340,6 @@ function App() {
 	// import passingData from "./playerPassingStatInfoListInfo";
 	// import receivingData from "./playerReceivingStatInfoListInfo";
 	// import rushingData from "./playerRushingStatInfoListInfo";
-
 	return (
 		<div className="App">
 			<header className="App-header flex flex-col justify-center content-center bg-gray-800">
@@ -415,48 +357,55 @@ function App() {
 				</div>
 			</div>
 			<FileUpload />
-			{teamData && teamNameID ? (
-				<DataTable
-					tableTitle={"Team Data"}
-					dataOptions={teamOptions}
-					displayData={teamData.teamStandingInfoList}
-					teamNameID={teamNameID}
-				/>
+			{teamNameID &&
+			freeAgents &&
+			defensiveData &&
+			passingData &&
+			receivingData &&
+			rushingData ? (
+				<>
+					<DataTable
+						tableTitle={"Team Data Week"}
+						dataOptions={teamOptions}
+						displayData={teamData.teamStandingInfoList}
+						teamNameID={teamNameID}
+					/>
+					<DataTable
+						tableTitle={"Free Agents"}
+						dataOptions={freeAgentOptions}
+						displayData={freeAgents.rosterInfoList}
+						teamNameID={teamNameID}
+					/>
+					<DataTable
+						tableTitle={"Defensive Stats"}
+						dataOptions={defensiveStats}
+						displayData={defensiveData.playerDefensiveStatInfoList}
+						teamNameID={teamNameID}
+					/>
+
+					<DataTable
+						tableTitle={"Passing Stats"}
+						dataOptions={passingStats}
+						displayData={passingData.playerPassingStatInfoList}
+						teamNameID={teamNameID}
+					/>
+
+					<DataTable
+						tableTitle={"Receiving Stats"}
+						dataOptions={receivingStats}
+						displayData={receivingData.playerReceivingStatInfoList}
+						teamNameID={teamNameID}
+					/>
+					<DataTable
+						tableTitle={"Rushing Stats"}
+						dataOptions={rushingStats}
+						displayData={rushingData.playerRushingStatInfoList}
+						teamNameID={teamNameID}
+					/>
+				</>
 			) : (
 				<></>
 			)}
-
-			{/* <DataTable
-				tableTitle={"Free Agents"}
-				dataOptions={freeAgentOptions}
-				displayData={freeAgents.rosterInfoList}
-				teamNameID={teamNameID}
-			/>
-			<DataTable
-				tableTitle={"Defensive Stats"}
-				dataOptions={defensiveStats}
-				displayData={defensiveData}
-				teamNameID={teamNameID}
-			/>
-
-			<DataTable
-				tableTitle={"Passing Stats"}
-				dataOptions={passingStats}
-				displayData={passingData}
-				teamNameID={teamNameID}
-			/>
-			<DataTable
-				tableTitle={"Receiving Stats"}
-				dataOptions={receivingStats}
-				displayData={receivingData}
-				teamNameID={teamNameID}
-			/>
-			<DataTable
-				tableTitle={"Rushing Stats"}
-				dataOptions={rushingStats}
-				displayData={rushingData}
-				teamNameID={teamNameID}
-			/> */}
 		</div>
 	);
 }

@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SortedData from "./SortedData";
 const DataTable = ({ tableTitle, dataOptions, displayData, teamNameID }) => {
 	const [sortVal, setSortVal] = useState("sort");
-	let week = "";
-	console.log(displayData);
-	if (displayData[0].weekIndex) {
-		week = " Week " + displayData[0].weekIndex;
-	}
+	const [week, setWeek] = useState(null);
+	console.log(displayData[0].weekIndex);
+	useEffect(() => {
+		if (displayData[0].weekIndex) {
+			setWeek(" Week " + displayData[0].weekIndex);
+		}
+	}, [displayData]);
+
 	return (
 		<>
 			<div className="bg-gray-400 p-5 top-0 sticky z-40">
 				<div className="lg:px-5 w-11/12 lg:w-9/12 flex justify-between m-auto">
-					<h2 className=" text-2xl font-bold">{tableTitle + week}</h2>
+					<h2 className=" text-2xl font-bold">
+						{tableTitle} {week && week}
+					</h2>
 					<select
 						onChange={(e) => setSortVal(e.target.value)}
 						className="lock appearance-none w-2/5 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
