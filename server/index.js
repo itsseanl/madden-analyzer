@@ -3,10 +3,8 @@ var app = express();
 var port = process.env.PORT || 8080;
 const fs = require("fs");
 
-app.use(express.static(`${__dirname}/../build`));
-
 //league info
-app.post("/:platform/:leagueID/:leagueteams", (req, res) => {
+app.post("/:platform/2177319/:leagueteams", (req, res) => {
 	let body = "";
 	req.on("data", (chunk) => {
 		body += chunk.toString();
@@ -32,7 +30,7 @@ function capitalizeFirstLetter(string) {
 
 //weekly info
 app.post(
-	"/:platform/:leagueId/week/:weekType/:weekNumber/:dataType",
+	"/:platform/2177319/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
 		console.log("weekly info path: " + req.params.dataType);
 		let weekNum = req.params.weekNumber;
@@ -181,7 +179,7 @@ app.post(
 );
 
 //team rosters
-app.post("/:platform/:leagueId/team/:teamID/roster", (req, res) => {
+app.post("/:platform/2177319/team/:teamID/roster", (req, res) => {
 	let body = "";
 	req.on("data", (chunk) => {
 		body += chunk.toString();
@@ -200,7 +198,7 @@ app.post("/:platform/:leagueId/team/:teamID/roster", (req, res) => {
 });
 
 //free agents
-app.post("/:platform/:leagueId/freeagents/roster", (req, res) => {
+app.post("/:platform/2177319/freeagents/roster", (req, res) => {
 	let body = "";
 	req.on("data", (chunk) => {
 		body += chunk.toString();
@@ -217,7 +215,6 @@ app.post("/:platform/:leagueId/freeagents/roster", (req, res) => {
 		});
 	});
 });
-const path = require('path')app.get('*', (req, res)=>{  res.sendFile(path.join(__dirname, '../build/index.html'));})
 
 //start server
 app.listen(port);
