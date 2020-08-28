@@ -30,6 +30,7 @@ app.post("/:platform/2177319/:leagueteams", (req, res) => {
 				console.log(err, err.stack);
 			} else {
 				console.log("success");
+				res.sendStatus(200);
 			}
 		});
 	});
@@ -90,6 +91,7 @@ app.post(
 							console.log(err, err.stack);
 						} else {
 							console.log("success");
+							res.sendStatus(200);
 						}
 					});
 
@@ -147,6 +149,7 @@ app.post(
 							console.log(err, err.stack);
 						} else {
 							console.log("success");
+							res.sendStatus(200);
 						}
 					});
 					// fs.writeFile(
@@ -204,6 +207,7 @@ app.post(
 							console.log(err, err.stack);
 						} else {
 							console.log("success");
+							res.sendStatus(200);
 						}
 					});
 					// });
@@ -268,6 +272,7 @@ app.post(
 								console.log(err, err.stack);
 							} else {
 								console.log("success");
+								res.sendStatus(200);
 							}
 						});
 						// fs.writeFile(
@@ -320,6 +325,7 @@ app.post("/:platform/2177319/team/:teamID/roster", (req, res) => {
 				console.log(err, err.stack);
 			} else {
 				console.log("success");
+				res.sendStatus(200);
 			}
 		});
 
@@ -354,6 +360,7 @@ app.post("/:platform/2177319/freeagents/roster", (req, res) => {
 				console.log(err, err.stack);
 			} else {
 				console.log("success");
+				res.sendStatus(200);
 			}
 		});
 		// fs.writeFile(`../public/data/freeAgents.json`, body, function (err) {
