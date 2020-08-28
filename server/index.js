@@ -35,7 +35,7 @@ app.post("/:platform/2177319/:leagueteams", (req, res) => {
 				Math.floor(Math.random() * 10) +
 				Math.floor(Math.random() * 10) +
 				"teamData.json",
-			Body: JSON.parse(body),
+			Body: body,
 			ACL: "public-read",
 		};
 
