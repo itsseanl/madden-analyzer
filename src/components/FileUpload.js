@@ -38,7 +38,7 @@ const FileUpload = () => {
 
 	useEffect(() => {
 		getHighlights();
-	});
+	}, []);
 
 	const onFileChange = (file) => {
 		if (file) {

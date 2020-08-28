@@ -22257,14 +22257,14 @@ h2,
 h3,
 h4,
 h5 h6 {
-  font-family: Montserrat;
+  font-family: "Montserrat";
 }
 
 p,
 a,
 input,
 button {
-  font-family: domine;
+  font-family: "domine";
 }
 
 @media (min-width: 640px) {

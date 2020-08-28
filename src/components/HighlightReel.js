@@ -36,7 +36,7 @@ const HighlightReel = ({ videoLinks }) => {
 					style={{ transform: `translateX(-${translated * 90}vw)` }}
 				>
 					{videoLinks.map((video) => {
-						if (video === "madden/") {
+						if (video == "madden/") {
 							return;
 						} else {
 							return (
