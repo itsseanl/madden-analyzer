@@ -78,7 +78,7 @@ app.post(
 							console.log("success");
 						}
 					});
-					let theFile = {
+					theFile = {
 						Bucket: "sfuploads/maddenstats",
 						Key: `week${weekNum}schedulesInfo.json`,
 						Body: body,
@@ -135,7 +135,7 @@ app.post(
 							console.log("success");
 						}
 					});
-					let theFile = {
+					theFile = {
 						Bucket: "sfuploads/maddenstats",
 						Key: `week${weekNum}teamStatsInfo.json`,
 						Body: body,
@@ -192,7 +192,7 @@ app.post(
 							console.log("success");
 						}
 					});
-					let theFile = {
+					theFile = {
 						Bucket: "sfuploads/maddenstats",
 						Key: `week${weekNum}defensiveStatsInfo.json`,
 						Body: body,
@@ -256,7 +256,7 @@ app.post(
 								console.log("success");
 							}
 						});
-						let theFile = {
+						theFile = {
 							Bucket: "sfuploads/maddenstats",
 							Key: `info.json`,
 							Body: body,
