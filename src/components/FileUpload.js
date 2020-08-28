@@ -29,6 +29,8 @@ const FileUpload = () => {
 					console.log(obj["Key"]);
 					videoLinks.push(obj["Key"]);
 				});
+				videoLinks.shift();
+				videoLinks.slice(Math.max(videoLinks.length - 5, 1));
 				setVideoLinks(videoLinks);
 			}
 		});
@@ -94,7 +96,7 @@ const FileUpload = () => {
 	const [showUploader, setShowUploader] = useState(false);
 	return (
 		<>
-			<div className="bg-gray-600 p-5">
+			<div className="bg-gray-400 p-5 sticky top-0 z-30">
 				<div className="lg:px-5 w-11/12 lg:w-9/12 flex justify-between m-auto">
 					<h2 className="text-2xl font-bold">Highlight Reel</h2>
 					<div>

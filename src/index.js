@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import "./styles/tailwind.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import "./fonts/domine/Domine-Regular.ttf";
+import "./fonts/montserrat/Montserrat-Bold.ttf";
 ReactDOM.render(
 	<React.StrictMode>
 		<App />

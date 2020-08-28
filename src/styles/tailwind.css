@@ -22239,6 +22239,34 @@ body {
   content: "Row ";
 }
 
+@font-face {
+  font-family: "Montserrat";
+
+  src: local("Montserrat"),
+		url("../fonts/montserrat/Montserrat-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "domine";
+
+  src: local("domine"), url("../fonts/domine/Domine-Regular.ttf") format("ttf");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 h6 {
+  font-family: Montserrat;
+}
+
+p,
+a,
+input,
+button {
+  font-family: domine;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

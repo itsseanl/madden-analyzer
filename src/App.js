@@ -6,7 +6,9 @@ import Parrot from "./football_parrot.gif";
 import teamData from "./data/teamData.json";
 import freeAgents from "./data/freeAgents.json";
 import defensiveData from "./data/defensiveStatsInfo.json";
-
+import passingData from "./data/playerPassingStatInfoListInfo";
+import receivingData from "./data/playerReceivingStatInfoListInfo";
+import rushingData from "./data/playerRushingStatInfoListInfo";
 function App() {
 	let teamNameID = {};
 	//team data displayed attributes
@@ -175,6 +177,58 @@ function App() {
 		weekIndex: "Week Index",
 	};
 
+	const passingStats = {
+		fullName: "Name",
+		teamId: "Team",
+		passAtt: "Pass Attempts",
+		passComp: "Pass Completions",
+		passCompPct: "Pass completion %",
+		passInts: "Interceptions",
+		passLongest: "Longest",
+		passerRating: "Passer Rating",
+		passSacks: "Sacks",
+		passTDs: "Passing TDs",
+		passYds: "Pass Yds",
+		passYdsPerAtt: "Yds Per Attempt",
+		passYdsPerGame: "Yds Per Game",
+		weekIndex: "Week",
+	};
+
+	const receivingStats = {
+		fullName: "Name",
+		teamId: "Team",
+		recCatches: "Receptions",
+		recCatchPct: "Reception %",
+		recDrops: "Drops",
+		recLongest: "Longest",
+		recTDs: "Reception TDs",
+		recToPct: "Rec To %",
+		recYdsAfterCatch: "Yds After Catch",
+		recYacPerCatch: "YAC Per Catch",
+		recYds: "Reception Yds",
+		recYdsPerCatch: "Reception Yds Per Catch",
+		recYdsPerGame: "Reception Yds Per Game",
+		weekIndex: "Week",
+	};
+
+	const rushingStats = {
+		fullName: "Name",
+		teamId: "Team",
+		rushAtt: "Rush Attempts",
+		rushBrokenTackles: "Broken Tackles",
+		rushFum: "Fumbles",
+		rushLongest: "longsest Rush",
+		rushTDs: "Rush TDs",
+		rushToPct: "Rush To % (?)",
+		rush20PlusYds: "20+ Yds",
+		rushYdsAfterContact: "Yds After Contact",
+		rushYds: "Rush Yds",
+		rushYdsPerAtt: "Yds Per Attempt",
+		rushYdsPerGame: "Yds Per Game",
+		stageIndex: "Stage",
+		weekIndex: "Week",
+	};
+
 	teamData.teamStandingInfoList.map((team) => {
 		return (teamNameID[team.teamId] = team.teamName);
 	});
@@ -186,6 +240,14 @@ function App() {
 					Madden Stats Baybeee
 				</h1>
 			</header>
+			<div className="bg-gray-800 p-5 sticky top-0">
+				<div className="lg:px-5 w-11/12 lg:w-9/12 flex justify-center m-auto">
+					<h2 className="text-center text-white">
+						To Update data, Use http://167.172.22.108:8080 in the Madden
+						Companion App
+					</h2>
+				</div>
+			</div>
 			<FileUpload />
 			<DataTable
 				tableTitle={"Team Data"}
@@ -203,6 +265,25 @@ function App() {
 				tableTitle={"Defensive Stats"}
 				dataOptions={defensiveStats}
 				displayData={defensiveData}
+				teamNameID={teamNameID}
+			/>
+
+			<DataTable
+				tableTitle={"Passing Stats"}
+				dataOptions={passingStats}
+				displayData={passingData}
+				teamNameID={teamNameID}
+			/>
+			<DataTable
+				tableTitle={"Receiving Stats"}
+				dataOptions={receivingStats}
+				displayData={receivingData}
+				teamNameID={teamNameID}
+			/>
+			<DataTable
+				tableTitle={"Rushing Stats"}
+				dataOptions={rushingStats}
+				displayData={rushingData}
 				teamNameID={teamNameID}
 			/>
 		</div>

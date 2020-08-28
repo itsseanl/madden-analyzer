@@ -122,32 +122,6 @@ app.post(
 					);
 					break;
 				}
-				// case "punting": {
-				// 	try {
-				// 		const { playerDefensiveStatInfoList: puntingStats } = JSON.parse(
-				// 			body
-				// 		);
-				// 		puntingStats.forEach((stat) => {
-				// 			writeOut += JSON.stringify(stat);
-				// 		});
-				// 		fs.writeFile(
-				// 			`../src/data/week${weekNum}puntingStatsInfo.json`,
-				// 			writeOut,
-				// 			function (err) {
-				// 				if (err) {
-				// 					return console.log(err);
-				// 				} else {
-				// 					res.sendStatus(200);
-
-				// 					return console.log("wrote weekly data successfully");
-				// 				}
-				// 			}
-				// 		);
-				// 	} catch (err) {
-				// 		console.log(err);
-				// 	}
-				// 	break;
-				// }
 				default: {
 					const property = `player${capitalizeFirstLetter(
 						dataType
@@ -171,6 +145,15 @@ app.post(
 								}
 							}
 						);
+						fs.writeFile(`../src/data/Info.json`, writeOut, function (err) {
+							if (err) {
+								return console.log(err);
+							} else {
+								res.sendStatus(200);
+
+								return console.log("wrote weekly data successfully");
+							}
+						});
 					} catch (err) {
 						console.log(err + " property:" + property);
 					}
