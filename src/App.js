@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import DataTable from "./components/DataTable";
 import FileUpload from "./components/FileUpload";
 import Parrot from "./football_parrot.gif";
-// import teamData from "./teamData.json";
-// import freeAgents from "./freeAgents.json";
-// import defensiveData from "./defensiveStatsInfo.json";
-// import passingData from "./playerPassingStatInfoListInfo";
-// import receivingData from "./playerReceivingStatInfoListInfo";
-// import rushingData from "./playerRushingStatInfoListInfo";
+
 function App() {
 	//team data displayed attributes
 	const teamOptions = {
@@ -229,6 +224,12 @@ function App() {
 	const [teamData, setTeamData] = useState(null);
 	const [teamNameID, setTeamNameID] = useState({});
 
+	const [freeAgents, setFreeAgents] = useState(null);
+	const [defensiveData, setDefensiveData] = useState(null);
+	const [passingData, setPassingData] = useState(null);
+	const [receivingData, setReceivingData] = useState(null);
+	const [rushingData, setRushingData] = useState(null);
+
 	useEffect(() => {
 		if (teamData) {
 			let nameID = {};
@@ -243,22 +244,159 @@ function App() {
 	}, [teamData]);
 
 	useEffect(() => {
-		fetch(
-			"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
-			{
-				method: "GET",
-				headers: {
-					"Content-Type": "application/octet-stream",
-					Accept: "application/octet-stream",
-				},
-			}
-		)
-			.then((response) => response.json())
-			.then((data) => {
+		// fetch(
+		// 	"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
+		// 	{
+		// 		method: "GET",
+		// 		headers: {
+		// 			"Content-Type": "application/octet-stream",
+		// 			Accept: "application/octet-stream",
+		// 		},
+		// 	}
+		// )
+		// 	.then((response) => response.json())
+		// 	.then((data) => {
+		// 		console.log(data);
+		// 		setTeamData(data);
+		// 	});
+		// let [
+		// 	theTeamData,
+		// 	theTeamRoster,
+		// 	defStats,
+		// 	passStats,
+		// 	recStats,
+		// 	rushStats,
+		// ] =
+		Promise.all([
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/teamData.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/freeAgents.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/defensiveStatsInfo.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/playerPassingStatInfoListinfo.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/playerReceivingStatInfoListinfo.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+			fetch(
+				"https://sfuploads.nyc3.digitaloceanspaces.com/maddenstats/playerRushingStatInfoListinfo.json",
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/octet-stream",
+						Accept: "application/octet-stream",
+					},
+				}
+			),
+		])
+			.then(function (responses) {
+				// Get a JSON object from each of the responses
+				console.log(responses);
+				return Promise.all(
+					responses.map(function (response) {
+						return response.json();
+					})
+				);
+			})
+			.then(function (data) {
+				// Log the data to the console
+				// You would do something with both sets of data here
 				console.log(data);
-				setTeamData(data);
+			})
+			.catch(function (error) {
+				// if there's an error, log it
+				console.log(error);
 			});
+		// .then(
+		// 	(
+		// 		theTeamData,
+		// 		theTeamRoster,
+		// 		defStats,
+		// 		passStats,
+		// 		recStats,
+		// 		rushStats
+		// 	) => {
+		// 		theTeamData.json();
+		// 		theTeamRoster.json();
+		// 		defStats.json();
+		// 		passStats.json();
+		// 		recStats.json();
+		// 		rushStats.json();
+		// 	}
+		// )
+		// .then(
+		// 	(
+		// 		theTeamData,
+		// 		theTeamRoster,
+		// 		defStats,
+		// 		passStats,
+		// 		recStats,
+		// 		rushStats
+		// 	) => {
+		// 		console.log(
+		// 			theTeamData,
+		// 			theTeamRoster,
+		// 			defStats,
+		// 			passStats,
+		// 			recStats,
+		// 			rushStats
+		// 		);
+		// 		setTeamData(theTeamData);
+		// 		setFreeAgents(theTeamRoster);
+		// 		setDefensiveData(defStats);
+		// 		setPassingData(passStats);
+		// 		setReceivingData(recStats);
+		// 		setReceivingData(rushStats);
+		// 	}
+		// );
 	}, []);
+
+	// import teamData from "./teamData.json";
+	// import freeAgents from "./freeAgents.json";
+	// import defensiveData from "./defensiveStatsInfo.json";
+	// import passingData from "./playerPassingStatInfoListInfo";
+	// import receivingData from "./playerReceivingStatInfoListInfo";
+	// import rushingData from "./playerRushingStatInfoListInfo";
 
 	return (
 		<div className="App">
