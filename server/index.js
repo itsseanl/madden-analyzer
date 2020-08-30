@@ -43,7 +43,7 @@ function capitalizeFirstLetter(string) {
 
 //weekly info
 app.post(
-	"/:platform/:leagueID/week/:weekType/:weekNumber/:dataType",
+	"/:platform/2177319/week/:weekType/:weekNumber/:dataType",
 	(req, res) => {
 		console.log("weekly info path: " + req.params.dataType);
 		let weekNum = req.params.weekNumber;
@@ -52,7 +52,7 @@ app.post(
 		const {
 			params: { username, leagueId, weekType, weekNumber, dataType },
 		} = req;
-		const basePath = `data/${leagueId}/`;
+		const basePath = `data/2177319/`;
 		// "defense", "kicking", "passing", "punting", "receiving", "rushing"
 		const statsPath = `${basePath}stats`;
 		req.on("data", (chunk) => {
@@ -94,28 +94,6 @@ app.post(
 							res.sendStatus(200);
 						}
 					});
-
-					// fs.writeFile(
-					// 	`../public/data/week${weekNum}schedulesInfo.json`,
-					// 	writeOut,
-					// 	function (err) {
-					// 		if (err) {
-					// 			return console.log(err);
-					// 		} else {
-					// 			return console.log("wrote weekly data successfully");
-					// 		}
-					// 	}
-					// );
-					// fs.writeFile(`../public/data/schedulesInfo.json`, writeOut, function (
-					// 	err
-					// ) {
-					// 	if (err) {
-					// 		return console.log(err);
-					// 	} else {
-					// 		res.sendStatus(200);
-					// 		return console.log("wrote weekly data successfully");
-					// 	}
-					// });
 					break;
 				}
 				case "teamstats": {
@@ -152,28 +130,6 @@ app.post(
 							res.sendStatus(200);
 						}
 					});
-					// fs.writeFile(
-					// 	`../public/data/week${weekNum}teamStatsInfo.json`,
-					// 	writeOut,
-					// 	function (err) {
-					// 		if (err) {
-					// 			return console.log(err);
-					// 		} else {
-					// 			return console.log("wrote weekly data successfully");
-					// 		}
-					// 	}
-					// );
-					// fs.writeFile(`../public/data/teamStatsInfo.json`, writeOut, function (
-					// 	err
-					// ) {
-					// 	if (err) {
-					// 		return console.log(err);
-					// 	} else {
-					// 		res.sendStatus(200);
-
-					// 		return console.log("wrote weekly data successfully");
-					// 	}
-					// });
 					break;
 				}
 				case "defense": {
@@ -210,31 +166,6 @@ app.post(
 							res.sendStatus(200);
 						}
 					});
-					// });
-					// fs.writeFile(
-					// 	`../public/data/week${weekNum}defensiveStatsInfo.json`,
-					// 	writeOut,
-					// 	function (err) {
-					// 		if (err) {
-					// 			return console.log(err);
-					// 		} else {
-					// 			return console.log("wrote weekly data successfully");
-					// 		}
-					// 	}
-					// );
-					// fs.writeFile(
-					// 	`../public/data/defensiveStatsInfo.json`,
-					// 	writeOut,
-					// 	function (err) {
-					// 		if (err) {
-					// 			return console.log(err);
-					// 		} else {
-					// 			res.sendStatus(200);
-
-					// 			return console.log("wrote weekly data successfully");
-					// 		}
-					// 	}
-					// );
 					break;
 				}
 				default: {
@@ -275,26 +206,6 @@ app.post(
 								res.sendStatus(200);
 							}
 						});
-						// fs.writeFile(
-						// 	`../public/data/week${weekNum + property}Info.json`,
-						// 	writeOut,
-						// 	function (err) {
-						// 		if (err) {
-						// 			return console.log(err);
-						// 		} else {
-						// 			return console.log("wrote weekly data successfully");
-						// 		}
-						// 	}
-						// );
-						// fs.writeFile(`../public/data/Info.json`, writeOut, function (err) {
-						// 	if (err) {
-						// 		return console.log(err);
-						// 	} else {
-						// 		res.sendStatus(200);
-
-						// 		return console.log("wrote weekly data successfully");
-						// 	}
-						// });
 					} catch (err) {
 						console.log(err + " property:" + property);
 					}
@@ -328,16 +239,6 @@ app.post("/:platform/2177319/team/:teamID/roster", (req, res) => {
 				res.sendStatus(200);
 			}
 		});
-
-		// fs.writeFile(`../public/data/teamRosters.json`, body, function (err) {
-		// 	if (err) {
-		// 		return console.log(err);
-		// 	} else {
-		// 		res.sendStatus(200);
-
-		// 		return console.log("wrote team rosters successfully");
-		// 	}
-		// });
 	});
 });
 
@@ -363,18 +264,9 @@ app.post("/:platform/2177319/freeagents/roster", (req, res) => {
 				res.sendStatus(200);
 			}
 		});
-		// fs.writeFile(`../public/data/freeAgents.json`, body, function (err) {
-		// 	if (err) {
-		// 		return console.log(err);
-		// 	} else {
-		// 		res.sendStatus(200);
-
-		// 		return console.log("wrote free agents successfully");
-		// 	}
-		// });
 	});
 });
 
 //start server
 app.listen(port);
-console.log("Server Started ");
+console.log("Server Started");
